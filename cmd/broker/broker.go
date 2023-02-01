@@ -1,8 +1,8 @@
 package main
 
 import (
-	broker "broker_demo/broker"
 	"fmt"
+	"go_queue/core"
 	"net"
 )
 
@@ -12,14 +12,14 @@ func main() {
 		fmt.Print("listen failed, err:", err)
 		return
 	}
-	go broker.Save()
+	go core.Save()
 	for {
 		conn, err := listen.Accept()
 		if err != nil {
 			fmt.Print("accept failed, err:", err)
 			continue
 		}
-		go broker.Process(conn)
+		go core.Process(conn)
 
 	}
 }

@@ -1,9 +1,9 @@
 package main
 
 import (
-	"broker_demo/broker"
 	"bytes"
 	"fmt"
+	"go_queue/core"
 	"net"
 )
 
@@ -14,9 +14,9 @@ func main() {
 	}
 	defer conn.Close()
 
-	msg := broker.Msg{Topic: "topic-test", MsgType: 1}
+	msg := core.Msg{Topic: "topic-test", MsgType: 1}
 
-	n, err := conn.Write(broker.MsgToBytes(msg))
+	n, err := conn.Write(core.MsgToBytes(msg))
 	if err != nil {
 		fmt.Println("write failed, err:", err)
 	}
@@ -25,12 +25,12 @@ func main() {
 	var res [128]byte
 	conn.Read(res[:])
 	buf := bytes.NewBuffer(res[:])
-	receMsg := broker.BytesToMsg(buf)
+	receMsg := core.BytesToMsg(buf)
 	fmt.Print(receMsg)
 
 	// ack
 	conn, _ = net.Dial("tcp", "127.0.0.1:12345")
-	l, e := conn.Write(broker.MsgToBytes(broker.Msg{Id: receMsg.Id, Topic: receMsg.Topic, MsgType: 3}))
+	l, e := conn.Write(core.MsgToBytes(core.Msg{Id: receMsg.Id, Topic: receMsg.Topic, MsgType: 3}))
 	if e != nil {
 		fmt.Println("write failed, err:", err)
 	}

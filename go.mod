@@ -1,3 +1,3 @@
-module broker_demo
+module go_queue
 
 go 1.19
