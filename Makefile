@@ -1,7 +1,5 @@
-# Go parameters
 GOCMD=go
 GOBUILD=$(GOCMD) build
-GOTEST=$(GOCMD) test
 
 all: build
 build:
@@ -11,3 +9,4 @@ build:
 
 clean:
 	rm -rf ./bin
+
