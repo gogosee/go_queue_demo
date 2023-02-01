@@ -5,7 +5,9 @@ GOTEST=$(GOCMD) test
 
 all: build
 build:
-	$(GOBUILD) -o ./bin/broker_demo ./cmd
+	$(GOBUILD) -o ./bin/broker ./cmd/borker
+	$(GOBUILD) -o ./bin/consumer ./cmd/consumer
+	$(GOBUILD) -o ./bin/producer ./cmd/producer
 
 clean:
 	rm -rf ./bin
